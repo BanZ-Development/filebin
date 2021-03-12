@@ -1,7 +1,6 @@
 {
   "name": "file-app",
   "version": "1.0.0",
-  "description": "",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,6 +9,18 @@
   "license": "ISC",
   "dependencies": {
     "express-fileupload": "^1.2.1",
-    "node": "^15.10.0"
-  }
+    "express.js": "^1.0.0",
+    "find-remove": "^2.0.3",
+    "node": "^15.10.0",
+    "rimraf": "^3.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BanZ-Development/filebin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/BanZ-Development/filebin/issues"
+  },
+  "homepage": "https://github.com/BanZ-Development/filebin#readme",
+  "description": ""
 }

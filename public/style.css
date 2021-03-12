@@ -22,20 +22,16 @@ h1::selection {
     border-radius: 10px;
     width: 100px;
     height: 35px;
-    background-color: #ffff;
+    background-color: rgb(37, 99, 255);
+    color: white;
     font-size: 20px;
     display: block;
     transition: all 0.3s ease;
     outline: none;
     margin-right: auto;
     margin-left: auto;
-    margin-top: 10px;
     cursor: pointer;
-}
-
-.btn:hover {
-    color: white;
-    background-color: rgb(37, 99, 255);
+    position: absolute;
 }
 
 .upload-div {
@@ -70,4 +66,23 @@ nav {
     padding: 5px;
     border-radius: 4px;
     outline: none;
+}
+
+.submit {
+    margin: 0px;
+    padding: 0px;
+    background-color:rgb(37, 99, 255);
+    color: white;
+    width: 105px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    border-radius: 4px;
+    height: 35px;
+}
+
+i.fas.fa-upload {
+    float: left;
+    margin-top: 10px;
+    margin-left: 5px;
 }

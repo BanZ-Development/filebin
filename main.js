@@ -1,10 +1,10 @@
 // File upload
-const express = require('express')
-const upload = require('express-fileupload')
+const express = require('express');
+const upload = require('express-fileupload');
 
-const app = express()
+const app = express();
 
-app.use(upload())
+app.use(upload());
 
 app.use(express.static(__dirname + '/public'));
 
@@ -14,7 +14,6 @@ app.post('/', (req, res) => {
         var file = req.files.file
         var filename = file.name
         console.log(filename)
-
         file.mv('./upload/'+filename, function (err) {
             if (err) {
                 res.send(err)
@@ -23,7 +22,11 @@ app.post('/', (req, res) => {
             }
         })
     }
-})
+});
+
+// Delete Files every 30 minutes
+var findRemoveSync = require('find-remove');
+findRemoveSync(__dirname + '/uploads', {age: {seconds: 3600}});
 
 //File Download
 
