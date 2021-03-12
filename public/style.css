@@ -17,33 +17,7 @@ h1::selection {
     background-color: #333;
 }
 
-.btn {
-    border: solid 2px rgb(37, 99, 255);
-    border-radius: 10px;
-    width: 100px;
-    height: 35px;
-    background-color: rgb(37, 99, 255);
-    color: white;
-    font-size: 20px;
-    display: block;
-    transition: all 0.3s ease;
-    outline: none;
-    margin-right: auto;
-    margin-left: auto;
-    cursor: pointer;
-    position: static;
-    text-align: center;
-}
-
-.upload-div {
-display: block;
-margin-left: auto;
-margin-right: auto;
-width: 500px;
-max-height: 600px;
-padding-top: 200px;
-text-align: center;
-}
+/* Nav */
 
 nav {
     width: 100%;
@@ -60,6 +34,37 @@ nav {
     margin-left: 5px;
 }
 
+.nav-logo {
+    width: 50px;
+    position: absolute;
+    border-radius: 4px;
+}
+
+.nav-links {
+    margin-left: 50px;
+}
+
+/* Main Content */
+
+.btn {
+    border: solid 2px rgb(37, 99, 255);
+    border-radius: 10px;
+    width: 100px;
+    height: 35px;
+    background-color: rgb(37, 99, 255);
+    color: white;
+    font-size: 20px;
+    display: block;
+    transition: all 0.3s ease;
+    outline: none;
+    margin-right: auto;
+    margin-left: auto;
+    cursor: pointer;
+    position: static;
+    text-align: center;
+    display: none;
+}
+
 #file {
     border: solid 2px rgb(37, 99, 255);
     color: white;
@@ -67,7 +72,18 @@ nav {
     padding: 5px;
     border-radius: 4px;
     outline: none;
+    display: none;
 }
+
+.upload-div {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    max-height: 600px;
+    padding-top: 200px;
+    text-align: center;
+    }
 
 .submit {
     margin: 0px;
@@ -83,10 +99,38 @@ nav {
     position: relative;
 }
 
+input [type=file] {
+    display: none;
+}
+
 i.fas.fa-upload {
-    position: absolute;
-    float: left;
-    margin-top: 9px;
-    left: 0;
-    margin-left: 5px;
+    color: #ffff;
+}
+
+i.fas.fa-folder {
+    color: #ffff;
+}
+
+.custom-file-upload {
+    border: 1px solid rgb(37, 99, 255);
+    border-radius: 4px;
+    color: white;
+    background-color: rgb(37, 99, 255);
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.filename {
+    margin: 0px;
+    padding: 0px;
+    background-color: #ccc;
+    color: #333;
+    border-radius: 0px 0px 4px 4px;
+    width: 120px;
+    height: 20px;
+    font-size: 12px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }

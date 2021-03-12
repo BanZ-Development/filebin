@@ -6,28 +6,36 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FileBin - Home</title>
+    <meta name="description" content="Send files to other devices or with your friends by sending them your unique code for each file">
+    <title>FileSwap - Home</title>
 </head>
 <body>
     <nav>
-        <a href="#" class="nav-item">Upload</a>
-        <a href="pages/downloads.html" class="nav-item">Download</a>
-        <a href="pages/contact.html" class="nav-item">Contact</a>
+        <img src="image/File swap nav.webp" class="nav-logo">
+        <div class="nav-links">
+            <a href="#" class="nav-item">Upload</a>
+            <a href="pages/downloads.html" class="nav-item">Download</a>
+            <a href="pages/contact.html" class="nav-item">Contact</a>
+        </div>
     </nav>
     <div class="upload-div">
     <h1>Upload Your Files</h1>
     <p>Get the code and give it to your friends or send it to a mobile device</p>
     <form method="POST" action="/" enctype="multipart/form-data">
-        <input type="file" name="file" id="file">
+        <div>
+        <label class="custom-file-upload">
+            <i class="fas fa-folder"></i> Choose Files
+            <input type="file" name="file" id="file">
+        </label>
+        <p class="filename">Image.png</p>
+        </div>
         <div class="submit">
-            <i class="fas fa-upload"></i>
+            <label class="custom-file-upload">
+                <i class="fas fa-upload"></i> Upload
             <input class="btn" type="submit" value="upload">
+            </label>
         </div>
     </form>
     </div>
-
-    <script>
-        let button = document.createElement("button")
-    </script>
 </body>
 </html>
