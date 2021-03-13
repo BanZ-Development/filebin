@@ -16,7 +16,7 @@ app.use(express.static(__dirname + '/public'));
 
 let gfs;
 const conn = mongoose.createConnection(require('./config.json').uri);
-conn.once('open',function(){
+conn.once('open',()=>{
     gfs = Grid(conn.db,mongo);
     gfs.collection('files');
 })
@@ -29,23 +29,19 @@ const storage = new GridFsStorage({
     file: (req, file) => {
         return new Promise((resolve, reject) => {
             crypto.randomBytes(16, (err, buf) => {
-            if (err) {
-                return reject(err);
-                        }
-                            const filename = buf.toString('hex') + path.extname(file.originalname);
-                            const fileInfo = {
-                                filename: filename,
-                                bucketName: 'files'
-                            };
-                            resolve(fileInfo);
-                            app.post('/upload',upload.single('file'),(req,res)=>{
-                                res.redirect('/');
-                            })
-                        });
-                    });
-                    }    
-            });
+            if (err) { return reject(err); }
+            const filename = buf.toString('hex') + path.extname(file.originalname);
+            const fileInfo = {
+                filename: filename,
+                bucketName: 'files'
+            };
+            resolve(fileInfo);
 const upload = multer({ storage });  
+
+app.post('/upload',upload.single('file'),(req,res)=>{
+    res.json({file: req.file});
+});
+
      
 /*app.post('/upload', upload.single('file'),(req, res) => {
     res.redirect('/');
