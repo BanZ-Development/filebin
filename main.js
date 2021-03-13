@@ -3,14 +3,14 @@ const express = require('express');
 const upload = require('express-fileupload');
 const mongo = require('./mongo');
 const fileSchema = require('./schemas/file');
+const multer = require('multer');
+const fs = require('fs');
 
 const app = express();
 
 app.use(upload());
 
 app.use(express.static(__dirname + '/public'));
-
-
 
 
 app.post('/', (req, res) => {
@@ -28,10 +28,11 @@ app.post('/', (req, res) => {
                     await mongo().then(async(mongoose) => {
                         try {
                             console.log('Connected to MongoDB!');
-                            const file = {
-                                filedir: filename
+                            const File = {
+                                filedir: filename,
+                                image: file
                             }
-                            await new fileSchema(file).save();    
+                            await new fileSchema(File).save();    
                         } finally {
                             mongoose.connection.close();
                         }
@@ -45,6 +46,7 @@ app.post('/', (req, res) => {
 
 // Delete Files every 30 minutes
 var findRemoveSync = require('find-remove');
+const file = require('./schemas/file');
 findRemoveSync(__dirname + '/uploads', {age: {seconds: 3600}});
 
 //File Download
