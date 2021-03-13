@@ -1,29 +1,25 @@
 // File upload
 const express = require('express');
-const upload = require('express-fileupload');
 const mongo = require('./mongo');
 const fileSchema = require('./schemas/file');
 const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 const crypto = require('crypto');
+const mongoose = require('mongoose');
+const path = require('path');
 
 const app = express();
 
-app.use(upload());
-
 app.use(express.static(__dirname + '/public'));
 
-let gfs;
 const conn = mongoose.createConnection(require('./config.json').uri);
+let gfs;
 conn.once('open',()=>{
     gfs = Grid(conn.db,mongo);
     gfs.collection('files');
 })
 
-app.post('/upload',upload.single('file'),(req,res)=>{
-    res.json({file: req.file});
-});
 const storage = new GridFsStorage({
     url: require('./config.json').uri,
     file: (req, file) => {
@@ -34,12 +30,18 @@ const storage = new GridFsStorage({
             const fileInfo = {
                 filename: filename,
                 bucketName: 'files'
-            };
+            }; 
             resolve(fileInfo);
+            });
+        });
+    }
+});        
 const upload = multer({ storage });  
 
+
 app.post('/upload',upload.single('file'),(req,res)=>{
-    res.json({file: req.file});
+    res.json({file:req.file});
+    res.redirect('/');
 });
 
 // Delete Files every 30 minutes
@@ -49,4 +51,5 @@ findRemoveSync(__dirname + '/uploads', {age: {seconds: 3600}});
 
 //File Download
 
-app.listen(5000)
+const port = 5000;
+app.listen(port, ()=>console.log(`Server started on port ${port}`));
