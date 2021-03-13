@@ -1,12 +1,17 @@
 // File upload
 const express = require('express');
 const upload = require('express-fileupload');
+const mongo = require('./mongo');
+const fileSchema = require('./schemas/file');
 
 const app = express();
 
 app.use(upload());
 
 app.use(express.static(__dirname + '/public'));
+
+
+connectToMongoose();
 
 app.post('/', (req, res) => {
     if (req.files) {
@@ -18,7 +23,21 @@ app.post('/', (req, res) => {
             if (err) {
                 res.send(err)
             } else {
-                res.send("File Uploaded")
+                const connectToMongoose = async() => {
+                    await mongo().then((mongoose) => {
+                        try {
+                            console.log('Connected to MongoDB!');
+                            const file = {
+                                filedir: filename
+                            }
+                            await new fileSchema(file).save();
+                        } finally {
+                            mongoose.connection.close();
+                        }
+                    })
+                }
+                connectToMongoose();
+                res.send(`File '${filename}' was uploaded`);
             }
         })
     }
