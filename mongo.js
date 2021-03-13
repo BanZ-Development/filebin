@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const pass = require('./config.json');
-const mongoPass = `mongodb://admin:${pass.mongoPass}@fileswap-shard-00-00.ikulf.mongodb.net:27017,fileswap-shard-00-01.ikulf.mongodb.net:27017,fileswap-shard-00-02.ikulf.mongodb.net:27017/db?ssl=true&replicaSet=atlas-hj8gh6-shard-0&authSource=admin&retryWrites=true&w=majority`
+const mongoPass = pass.uri;
 
 module.exports = async() => {
     await mongoose.connect(mongoPass, {
