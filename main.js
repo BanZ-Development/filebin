@@ -1,10 +1,10 @@
 // File upload
 const express = require('express');
 const mongo = require('./mongo');
-const fileSchema = require('./schemas/file');
 const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
+const fs = require('fs');
 const crypto = require('crypto');
 const mongoose = require('mongoose');
 const path = require('path');
@@ -29,6 +29,7 @@ const storage = new GridFsStorage({
             const filename = buf.toString('hex') + path.extname(file.originalname);
             const fileInfo = {
                 filename: filename,
+                id: file.id,
                 bucketName: 'files'
             }; 
             resolve(fileInfo);
@@ -38,18 +39,15 @@ const storage = new GridFsStorage({
 });        
 const upload = multer({ storage });  
 
-
 app.post('/upload',upload.single('file'),(req,res)=>{
-    res.json({file:req.file});
-    res.redirect('/');
+    const id = req.file.id;
+    res.send(id);
 });
 
-// Delete Files every 30 minutes
-var findRemoveSync = require('find-remove');
-const file = require('./schemas/file');
-findRemoveSync(__dirname + '/uploads', {age: {seconds: 3600}});
-
-//File Download
+app.get('/:id',(req,res)=>{
+    let fileID = filename.split('.');
+    conn.db.collection.find({filename: fileID[0]})
+})
 
 const port = 5000;
 app.listen(port, ()=>console.log(`Server started on port ${port}`));
