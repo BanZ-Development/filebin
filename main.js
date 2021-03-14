@@ -44,10 +44,5 @@ app.post('/upload',upload.single('file'),(req,res)=>{
     res.send(id);
 });
 
-app.get('/:id',(req,res)=>{
-    let fileID = filename.split('.');
-    conn.db.collection.find({filename: fileID[0]})
-})
-
 const port = 5000;
 app.listen(port, ()=>console.log(`Server started on port ${port}`));
